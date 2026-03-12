@@ -2,12 +2,10 @@
 title: LLM 的反向图灵测试，与量子力学量子态塌缩
 author: yuchong
 date: 2026-03-11 00:34:00 +0800
-categories: [Blogging, Tutorial]
+categories: [AI, Quantum Mechanics]
 tags: [LLM, Turing Test, Quantum Mechanics]
 math: true
 ---
-
-The [favicons](https://www.favicon-generator.org/about/) of [**Chirpy**](https://github.com/cotes2020/jekyll-theme-chirpy/) are placed in the directory `assets/img/favicons/`{: .filepath}. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons.
 
 大语言模型可能像一面镜子，实际反映的是使用者的智力水平，这构成了一种反向图灵测试。
 
