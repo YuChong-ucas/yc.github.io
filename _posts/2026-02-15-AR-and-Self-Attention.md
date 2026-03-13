@@ -17,7 +17,7 @@ $$
 
 其中：
 - $\alpha$  是惩罚因子；
-- $athcal{N}(i)$  是以 $x_i$ 中心点的临域为中心点的 $n$ 邻域；
+- $\mathcal{N}(i)$  是以 $x_i$ 中心点的临域为中心点的 $n$ 邻域；
 - $\hat{x}_i$  表示坐标点 $i$ 处depth 优化前真实值；
 - $x_i$  表示优化后的目标depth；
 - 已知观测集合： $\Omega \subset \{1, \ldots, N\}$ .
