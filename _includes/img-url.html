@@ -1,20 +1,20 @@
 {%- comment -%}
-  Generate media resource final URL based on `site.img_cdn`, `page.img_path`
+  Generate image final URL based on `site.img_cdn`, `page.img_path`
 
   Arguments:
-    src - required, basic media resources path
-    img_path - optional, relative path of media resources
+    src - required, basic image path
+    img_path - optional, relative path of image
     absolute - optional, boolean, if true, generate absolute URL
 
   Return:
-    media resources URL
+    image URL
 {%- endcomment -%}
 
 {% assign url = include.src %}
 
 {%- if url -%}
   {% unless url contains ':' %}
-    {%- comment -%} Add media resources img_path prefix {%- endcomment -%}
+    {%- comment -%} Add page image path prefix {%- endcomment -%}
     {% assign url = include.img_path | default: '' | append: '/' | append: url %}
 
     {%- comment -%} Prepend CND URL {%- endcomment -%}

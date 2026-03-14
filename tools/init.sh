@@ -80,6 +80,8 @@ init_files() {
     rm -rf .github && mkdir -p .github/workflows
     mv "$temp/$ACTIONS_WORKFLOW" .github/workflows/"$ACTIONS_WORKFLOW"
     rm -rf "$temp"
+
+    # _sedi "s/^img_cdn:.*/img_cdn:/;s/^avatar:.*/avatar:/" _config.yml
   fi
 
   # Cleanup image settings in site config

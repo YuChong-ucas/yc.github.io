@@ -32,6 +32,20 @@ const swconf = {
         {% endfor %}
       ],
 
+      {%- comment -%} The request url with below domain will be cached. {%- endcomment -%}
+    allowHosts: [
+      {% if site.img_cdn and site.img_cdn contains '//' %}
+        '{{ site.img_cdn | split: '//' | last | split: '/' | first }}',
+      {% endif %}
+
+      {%- unless site.assets.self_host.enabled -%}
+       {% for cdn in site.data.origin["cors"].cdns %}
+          '{{ cdn.url | split: "//" | last }}'
+          {%- unless forloop.last -%},{%- endunless -%}
+        {% endfor %}
+      {% endunless %}
+      ],
+
       {%- comment -%} URLs containing the following prefixes will not be cached. {%- endcomment -%}
       urlPrefixes: [
         {% if site.analytics.goatcounter.id != nil and site.pageviews.provider == 'goatcounter' %}
