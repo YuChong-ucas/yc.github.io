@@ -208,9 +208,8 @@ LSTM 解决：长序列梯度消失
 
 解决办法都是提供一条“恒等路径”让梯度直接传播。
 
-2）Kimi 近期发表文章：
- 𝑨𝒕𝒕𝒆𝒏𝒕𝒊𝒐𝒏 𝑹𝒆𝒔𝒊𝒅𝒖𝒂𝒍𝒔
- https://github.com/MoonshotAI/Attention-Residuals/blob/master/Attention_Residuals.pdf
+2）Kimi 近期文章Attention Residuals：
+ [𝑨𝒕𝒕𝒆𝒏𝒕𝒊𝒐𝒏 𝑹𝒆𝒔𝒊𝒅𝒖𝒂𝒍𝒔](https://github.com/MoonshotAI/Attention-Residuals/blob/master/Attention_Residuals.pdf)
 
 重新思考深度聚合。
 
