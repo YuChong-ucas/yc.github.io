@@ -1,7 +1,7 @@
 ---
 title: 连接主义，后向传播算法，可微分学习
 author: yuchong
-date: 2026-04-01 00:34:00 +0800
+date: 2026-04-06 00:34:00 +0800
 categories: [AI]
 tags: [AI]
 math: true
