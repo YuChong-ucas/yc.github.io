@@ -2,8 +2,8 @@
 title: 从3DMM到stable diffusion生成式模型
 author: yuchong
 date: 2026-01-19 00:34:00 +0800
-categories: [physics]
-tags: [physics]
+categories: [AI]
+tags: [AI]
 math: true
 ---
 
