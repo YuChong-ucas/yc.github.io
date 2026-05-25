@@ -9,6 +9,16 @@ math: true
 
 一般调用pp-ocr模型，我们会得到按照行输出的bbox,但是如果希望按照单字输出，就需要从SVTR logits 中估算字符 bbox。
 
+【应用场景】
+
+  1.为了单字检测，在AIGC项目中并进行改字；
+
+  2.解决生图模型后处理中的小字崩坏问题，结合
+  https://github.com/limuloo/RefineAnything
+  这个开源项目，就可以实现对小字崩坏的修复；
+
+  3.训练模型时，为了缓解小字崩坏，在输入的时候，就可以在提示词里加入小字，此时可以进行单字检测后进行加入，并带有精确的bbox。
+
 ```python
 
 input_tensor, img_width_rec = preprocess_for_recognizer(crop_img)
