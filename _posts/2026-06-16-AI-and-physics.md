@@ -114,19 +114,19 @@ $
 
 又因为$p(x,z) = p_\theta(x\vert{}z)p(z)$,得到变分推断最著名的恒等式：
 
-$
+$$
 \begin{equation}
 \log p(x)=\operatorname{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))+D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z\vert{}x))
 \end{equation}
-$
+$$
  
 由于 KL 散度 $D_{KL}(q_\phi(z\vert{}x) \parallel p(z\vert{}x)) \geq 0$ 恒成立，因此公式前两项构成了 $\log p(x)$ 的下界，即 ELBO（Evidence Lower Bound，证据下界）:
 
-$
+$$
 \begin{equation}
 \text{ELBO}(\phi ,\theta ;x)=\operatorname{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))
 \end{equation}
-$
+$$
 
 $\log p(x)\ge \text{ELBO}(\phi ,\theta ;x)$
 
