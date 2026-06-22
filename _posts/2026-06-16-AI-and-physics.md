@@ -83,11 +83,11 @@ p(z|x) = \frac{p(x|z)p(z)}{p(x)} = \frac{p(x|z)p(z)}{\int p(x|z)p(z)dz}
 \end{equation}
 $
 
-分母需要对所有潜在特质z进行积分，在高维连续空间中，这个积分是不可积（Intractable）的，导致我们无法直接算出 p(z|x)。
+分母需要对所有潜在特质z进行积分，在高维连续空间中，这个积分是不可积（Intractable）的，导致我们无法直接算出 $p(z\vert{}x)$。
 
-变分推断的解法：既然算不出精确的 $p(z|x)$，我们就拿一个形式简单的已知分布 $q_{\phi}(z|x)$（通常假设为高斯分布）去主动拟合 $p(z|x)$。通过调整 q 的参数 φ，让它与真实后验的差距尽可能小。这个解法其实和VAE的核心思想是一致的。
+变分推断的解法：既然算不出精确的 $p(z\vert{}x)$，我们就拿一个形式简单的已知分布 $q_{\phi}(z\vert{}x)$（通常假设为高斯分布）去主动拟合 $p(z\vert{}x)$。通过调整 q 的参数 φ，让它与真实后验的差距尽可能小。这个解法其实和VAE的核心思想是一致的。
 
-为了衡量近似分布 $q_\phi(z\vert{}x)$ 与真实分布 $p(z|x)$ 的相似度，我们使用 KL 散度（Kullback-Leibler Divergence）：
+为了衡量近似分布 $q_\phi(z\vert{}x)$ 与真实分布 $p(z\vert{}x)$ 的相似度，我们使用 KL 散度（Kullback-Leibler Divergence）：
 
 $
 \begin{equation}
@@ -113,6 +113,7 @@ $
 $
 
 又因为$p(x,z) = p_\theta(x\vert{}z)p(z)$,得到变分推断最著名的恒等式：
+
 $
 \begin{equation}
 \log p(x)=\mathbb{E}_{z\sim q_{\phi }(z|x)}[\log p_{\theta }(x|z)]-D_{KL}(q_{\phi }(z|x)\parallel p(z))+D_{KL}(q_{\phi }(z|x)\parallel p(z|x))
@@ -120,6 +121,7 @@ $
 $
 
 由于 KL 散度 $D_{KL}(q_\phi(z\vert{}x) \parallel p(z\vert{}x)) \geq 0$ 恒成立，因此公式前两项构成了 $\log p(x)$ 的下界，即 ELBO（Evidence Lower Bound，证据下界）:
+
 $
 \begin{equation}
 \text{ELBO}(\phi ,\theta ;x)=\mathbb{E}_{z\sim q_{\phi }(z|x)}[\log p_{\theta }(x|z)]-D_{KL}(q_{\phi }(z|x)\parallel p(z))
@@ -132,7 +134,7 @@ $\log p(x)\ge \text{ELBO}(\phi ,\theta ;x)$
 
 那么这两项的含义是什么呢？
 
-第一项，期望在近似后验分布 $\log p_{\theta}(x|z)$ 下采样出的 $z$，能够被解码器很好地重建出原数据 $x$，它鼓励重建的图像和原图越像越好。第二项，鼓励编码器输出的分布 $q_{\phi }(z|x)$ 不要偏离我们预先设定的先验分布 $p(z)$。
+第一项，期望在近似后验分布 $\log p_{\theta}(x\vert{}z)$ 下采样出的 $z$，能够被解码器很好地重建出原数据 $x$，它鼓励重建的图像和原图越像越好。第二项，鼓励编码器输出的分布 $q_{\phi }(z\vert{}x)$ 不要偏离我们预先设定的先验分布 $p(z)$。
 
 在物理学中，自由能（Free Energy）的核心含义可以通俗地理解为：在一个热力学系统中，在特定条件下（如恒温恒压或恒温恒容）真正“可用”来做有用功的那部分能量。
 它之所以被称为“自由”，是因为这部分能量不受系统内部无序度（熵）的“束缚”，可以被系统自由地释放出来对外做功。我们会使用吉布斯自由能G和亥姆霍兹自由能F。
@@ -219,5 +221,3 @@ Yang Song 和 Stefano Ermon 提出了基于分数的生成模型，专注于学�
 
 Jonathan Ho 等人发表了《Denoising Diffusion Probabilistic Models》（DDPM），通过简化训练目标并采用 U-Net 架构，系统性地提出了去噪扩散概率模型。DDPM 展示了扩散模型能够生成高质量图像，标志着其开始与当时占主导地位的生成对抗网络（GANs）竞争。
 
-
-ssh-keygen -t ed25519 -C '944099772@qq.com'
