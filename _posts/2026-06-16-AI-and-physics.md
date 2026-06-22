@@ -116,7 +116,7 @@ $
 
 $
 \begin{equation}
-\log p(x)=\mathbb{E}_{z\sim q_{\phi }(z|x)}[\log p_{\theta }(x|z)]-D_{KL}(q_{\phi }(z|x)\parallel p(z))+D_{KL}(q_{\phi }(z|x)\parallel p(z|x))
+\log p(x)=\mathbb{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))+D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z\vert{}x))
 \end{equation}
 $
 
@@ -124,7 +124,7 @@ $
 
 $
 \begin{equation}
-\text{ELBO}(\phi ,\theta ;x)=\mathbb{E}_{z\sim q_{\phi }(z|x)}[\log p_{\theta }(x|z)]-D_{KL}(q_{\phi }(z|x)\parallel p(z))
+\text{ELBO}(\phi ,\theta ;x)=\mathbb{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))
 \end{equation}
 $
 
