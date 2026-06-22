@@ -209,3 +209,6 @@ Transformer是一个“动态权重版”的伊辛模型, attention = 动态相�
 Yang Song 和 Stefano Ermon 提出了基于分数的生成模型，专注于学习数据分布的梯度，对现代扩散模型的发展至关重要。
 
 Jonathan Ho 等人发表了《Denoising Diffusion Probabilistic Models》（DDPM），通过简化训练目标并采用 U-Net 架构，系统性地提出了去噪扩散概率模型。DDPM 展示了扩散模型能够生成高质量图像，标志着其开始与当时占主导地位的生成对抗网络（GANs）竞争。
+
+
+ssh-keygen -t ed25519 -C '944099772@qq.com'
