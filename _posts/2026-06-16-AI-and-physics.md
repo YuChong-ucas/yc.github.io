@@ -116,15 +116,15 @@ $
 
 $
 \begin{equation}
-\log p(x)=\mathbb{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))+D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z\vert{}x))
+\log p(x)=\operatorname{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))+D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z\vert{}x))
 \end{equation}
 $
-
+ 
 由于 KL 散度 $D_{KL}(q_\phi(z\vert{}x) \parallel p(z\vert{}x)) \geq 0$ 恒成立，因此公式前两项构成了 $\log p(x)$ 的下界，即 ELBO（Evidence Lower Bound，证据下界）:
 
 $
 \begin{equation}
-\text{ELBO}(\phi ,\theta ;x)=\mathbb{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))
+\text{ELBO}(\phi ,\theta ;x)=\operatorname{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))
 \end{equation}
 $
 
