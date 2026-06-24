@@ -1,5 +1,5 @@
 ---
-title: AI 与物理学的关系思考
+title: AI 与物理学的关系
 author: yuchong
 date: 2026-06-16 00:34:00 +0800
 categories: [AI]
