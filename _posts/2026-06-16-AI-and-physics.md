@@ -298,7 +298,7 @@ $$
 -\sum_{t=1}^{T} \log q(x_t|x_{t-1})&=-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0) + \log q(x_t|x_0) - \log q(x_{t-1}|x_0))\\
 &=\sum_{t=1}^{T}(-\log q(x_t|x_0)+\log q(x_{t-1}|x_0))-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
 &=\log q(x_0|x_0)-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
-&=\log 0-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
+&=\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
 &=-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))
 \end{aligned}
 $$
@@ -326,7 +326,8 @@ $$
 $$
 \mathbb{E}_q[\log p_\theta(x_{t-1}|x_t) - \log q(x_{t-1}|x_t, x_0)] = -KL(q \| p_\theta)
 $$
-当$t=1$时：$q(x_0 | x_1, x_0) = \delta(x_0)$,代表的含义是：在已经知道 $x_0$ 和 $x_1$的条件下，$x_0$的分布是什么？也就是不存在随机性，与模型的优化参数无关。最终（16）式变为：
+
+当$t=1$时，$q(x_0 | x_1, x_0) = \delta(x_0)$,代表的含义是：在已经知道 $x_0$ 和 $x_1$的条件下，$x_0$的分布是什么？也就是不存在随机性，与模型的优化参数无关。最终（16）式变为：
 
 $$
 \begin{equation}
@@ -364,16 +365,22 @@ $$
 \nabla p(x_t) = \int p(x_t | x_0) p(x_0) \nabla \log p(x_t | x_0) \, dx_0
 $$
 
-又因为：$$p(x_t | x_0) p(x_0)=p(x_t,x_0)$$
+又因为：
+$$p(x_t | x_0) p(x_0)=p(x_t,x_0)$$
 
 所以：
 $$\nabla p(x_t) = \int p(x_t, x_0) \nabla \log p(x_t | x_0) \, dx_0$$
 
 代回 log 梯度:
+
 $$
 \nabla \log p(x_t) = \frac{1}{p(x_t)} \int p(x_t, x_0) \nabla \log p(x_t | x_0) \, dx_0
 $$
-根据Bayes公式有：$p(x_0 | x_t) = \frac{p(x_t, x_0)}{p(x_t)}$,代入上式：
+
+根据Bayes公式有：
+
+$p(x_0 | x_t) = \frac{p(x_t, x_0)}{p(x_t)}$,代入上式：
+
 $$\nabla \log p(x_t) = \int p(x_0 | x_t) \nabla \log p(x_t | x_0) \, dx_0$$
 
 得到：
