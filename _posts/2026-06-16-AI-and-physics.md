@@ -244,22 +244,24 @@ $$
 
 根据：$\log \mathbb{E}[X] \geq \mathbb{E}[\log X]$
 
-$
+$$
 \begin{equation}
 \log p_\theta(x_0) \geq \mathbb{E}_q \left[ \log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} \right]
 \end{equation}
-$
+$$
+
 我们知道：
 $
 \begin{equation}
 p_\theta(x_{0:T}) = p(x_T) \prod_{t=1}^{T} p_\theta(x_{t-1}|x_t)
 \end{equation}
 $
-$
+
+$$
 \begin{equation}
 q(x_{1:T}|x_0) = \prod_{t=1}^{T} q(x_t|x_{t-1})
 \end{equation}
-$
+$$
 
 得到（12）式右侧变为：
 
@@ -299,15 +301,16 @@ $$
 &=\log 0-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
 &=-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))
 \end{aligned}
-
 $$
+
+
 最终（12）式变为：
 
-$
+$$
 \begin{equation}
 \log p_\theta(x_0) \geq \mathbb{E}_q \left[ \log p(x_T) - \log q(x_T|x_0) + \sum_{t=1}^T (\log p_\theta(x_{t-1}|x_t) - \log q(x_{t-1}|x_t, x_0)) \right]
 \end{equation}
-$
+$$
 
 我们知道：
 
@@ -316,18 +319,20 @@ KL(q \| p) = \mathbb{E}_q[\log q - \log p]
 $$
 
 针对（16）式，我们有：
-$$
-\mathbb{E}_q[\log p(x_T) - \log q(x_T|x_0)] = -KL(q(x_T|x_0) \| p(x_T))\\
 
+$$
+\mathbb{E}_q[\log p(x_T) - \log q(x_T|x_0)] = -KL(q(x_T|x_0) \| p(x_T))
+$$
+$$
 \mathbb{E}_q[\log p_\theta(x_{t-1}|x_t) - \log q(x_{t-1}|x_t, x_0)] = -KL(q \| p_\theta)
 $$
 当$t=1$时：$q(x_0 | x_1, x_0) = \delta(x_0)$,代表的含义是：在已经知道 $x_0$ 和 $x_1$的条件下，$x_0$的分布是什么？也就是不存在随机性，与模型的优化参数无关。最终（16）式变为：
 
-$
+$$
 \begin{equation}
 \log p_\theta(x_0) \geq \mathbb{E}_q[\log p_\theta(x_0|x_1)] - \sum_{t=2}^T KL(q(x_{t-1}|x_t, x_0) \| p_\theta(x_{t-1}|x_t)) - KL(q(x_T|x_0) \| p(x_T))
 \end{equation}
-$
+$$
 这3项分布代表：起点重构项，中间逐步匹配KL项，和终点KL项。
 
 一个概率图模型，全噪声的概率比较低，真实世界的所有高清图片，都分布在极其高维空间中的某些特定区域（我们称之为“数据流形”）。在这个高维空间里，每一点都有一个“概率值”，扩散模型学习的目标就是从任何地方出发，都指向高概率的区域，因此概率梯度变化最快的路径，就是模型需要学习的路径。
@@ -352,13 +357,16 @@ $$
 
 $$\nabla_{x_t} p(x_t) = \int \nabla_{x_t} p(x_t | x_0) p(x_0) \, dx_0$$
 
-根据（18）式得到：$\nabla p(x_t | x_0) = p(x_t | x_0) \nabla \log p(x_t | x_0)$,代入上式：
+根据（18）式得到：$$\nabla p(x_t | x_0) = p(x_t | x_0) \nabla \log p(x_t | x_0)$$ 
+代入上式：
 
 $$
 \nabla p(x_t) = \int p(x_t | x_0) p(x_0) \nabla \log p(x_t | x_0) \, dx_0
 $$
 
-又因为：$p(x_t | x_0) p(x_0)=p(x_t,x_0)$,所以：
+又因为：$$p(x_t | x_0) p(x_0)=p(x_t,x_0)$$
+
+所以：
 $$\nabla p(x_t) = \int p(x_t, x_0) \nabla \log p(x_t | x_0) \, dx_0$$
 
 代回 log 梯度:
