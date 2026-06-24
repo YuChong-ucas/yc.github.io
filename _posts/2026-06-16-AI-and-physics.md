@@ -7,7 +7,7 @@ tags: [AI，physics]
 math: true
 ---
 
-# 1.玻尔兹曼分布与softmax
+# 1. 玻尔兹曼分布与softmax
 
 ## 玻尔兹曼分布（统计力学）
 
@@ -60,7 +60,7 @@ $
 另外，在大语言模型中，经过多层 Transformer 编码后，最后一个词的隐藏状态（Hidden State）会被送入一个巨大的线性层，比如为 N，这个线性层输出的 N 个原始分数被称为 Logits，接着会使用softmax映射，并使用Argmax选择最高概率的词。
 
 
-# 2.物理熵与信息熵
+# 2. 物理熵与信息熵
 
 热力学第二定律：它有多种表述方式，核心思想是自然界的过程具有方向性。克劳修斯的表述是：热量不能自发地从低温物体转移到高温物体。开尔文勋爵的表述是：不可能从单一热源吸取热量，使之完全变为有用功而不产生其他影响。这一定律引入了熵（Entropy）的概念。熵是衡量一个系统“无序度”或“混乱程度”的物理量。热力学第二定律的本质是：在一个孤立系统中，总熵永远不会减少，只会增加或保持不变（在理想的、可逆的过程中）。简单来说，宇宙的趋势是从有序走向无序。热水会变凉，墨水滴入水中会扩散，这都是熵增的过程。
 
@@ -71,7 +71,7 @@ $
 
 香农熵假设了一个拥有“无限算力”和“无限存储”的绝对观察者，当我们将视角切换到“有限算力”的观察者（人），并强调“可复用、可泛化的结构性信息”时，这就不再是一个纯粹的数学或通信问题，在经典热力学中，熵代表系统的无序度。而在有限算力的物理世界中，“提取可复用信息”本质上是一个“做功”的过程。在有限算力下，信息的提取不是免费的，在物理学中，有些问题（如多体量子系统的精确基态）在数学上是存在的，但在物理上是“不可计算”的（NP-Hard 或更糟）。如果观察者没有足够的算力，这些隐藏在数据中的结构就等同于“不存在”。在有限算力的约束下，信息等于系统内部能够被物理机制稳定维持、且能被观察者以有限能量（计算功）成功解码的有序结构。这篇文章《From Entropy to Epiplexity》是从香农熵到“认知复杂度”（Epiplexity）的跨越。
 
-# 3.在AIGC被复兴的VAE
+# 3. 在AIGC被复兴的VAE
 
 VAE（Variational Autoencoder，变分自编码器）其实不是“新生物”，它最早出现在 2013–2014 年，由 Kingma 和 Welling 在一篇经典论文 “Auto-Encoding Variational Bayes” (2013, ICLR 2014 发表) 中提出。这篇论文首次系统化地把 概率图模型 与 深度学习的自编码器 结合起来，用 变分推断（variational inference）+ reparameterization trick 解决了采样不可导的问题，使得端到端的生成建模成为可能。VAE是图像生成模型的典型算法，其核心思想：将原始数据映射到一个已知分布，然后从已知分布中随机采样，通过生成模型得到与原始数据近似的数据。其本质上是对数据分布的拟合，然后从分布中采样得到新数据。
 
@@ -127,9 +127,13 @@ $$
 \text{ELBO}(\phi ,\theta ;x)=\operatorname{E}_{z\sim q_{\phi }(z\vert{}x)}[\log p_{\theta }(x\vert{}z)]-D_{KL}(q_{\phi }(z\vert{}x)\parallel p(z))
 \end{equation}
 $$
+由此可以得到：
 
-$\log p(x)\ge \text{ELBO}(\phi ,\theta ;x)$
-
+$$
+\begin{equation}
+\log p(x)\ge \text{ELBO}(\phi ,\theta ;x)
+\end{equation}
+$$
 由此可知，在训练 VAE 时，我们的目标是最大化边际似然 $\log p(x)$。由于真实后验不可知，我们无法直接最小化第三项的 KL 散度。但通过公式可以发现：最大化 ELBO 相当于在同时“最大化数据似然”并“最小化近似后验与真实后验的差距”,这个也是变分推断的精妙之处。
 
 那么这两项的含义是什么呢？
@@ -152,7 +156,7 @@ E是系统的内能（系统倾向于寻找能量最低、最稳定的状态，�
 
 
 
-# 4.Hopfield 网络
+# 4. Hopfield 网络
 
 约翰·J·霍普菲尔德（John J. Hopfield）因“通过人工神经网络实现机器学习的基础性发现和发明”，与杰弗里·E·辛顿（Geoffrey E. Hinton）共同获得了2024年诺贝尔物理学奖。霍普菲尔德利用描述磁性材料中自旋相互影响的物理学原理，建立了一个具有节点和连接的模型网络。他将神经网络建模成一个具有“能量函数”的物理系统，网络在运行中会寻找能量最低的稳定点，从而实现了信息的存储与回忆。
 
@@ -192,7 +196,7 @@ $∑ᵢ sᵢ$：对所有格点上的自旋求和，表示外场对系统总能�
 
 这种类比使得Hopfield网络能够模拟“联想记忆”——当输入一个不完整或带噪声的模式时，网络会通过状态更新逐步降低能量，最终收敛到一个稳定的“吸引子”状态，即最接近的存储记忆。这个过程与物理系统中自旋趋向能量最低态的过程完全一致。
 
-# 5.玻尔兹曼机（Boltzmann Machine）
+# 5. 玻尔兹曼机（Boltzmann Machine）
 
 玻尔兹曼机（Boltzmann Machine, BM）是一种基于概率图模型的神经网络，它以物理中的玻尔兹曼分布为基础，将能量函数与概率分布联系起来，是一种无监督学习模型，玻尔兹曼机使用能量函数来描述系统的状态。网络状态的概率由其能量决定，根据统计物理原理，能量越低的状态出现的概率越高。玻尔兹曼机通过模拟退火的方法调整系统状态，寻找最小能量的配置。其训练目标是最大化输入数据的似然函数，学习数据分布。
 
@@ -221,3 +225,214 @@ Yang Song 和 Stefano Ermon 提出了基于分数的生成模型，专注于学�
 
 Jonathan Ho 等人发表了《Denoising Diffusion Probabilistic Models》（DDPM），通过简化训练目标并采用 U-Net 架构，系统性地提出了去噪扩散概率模型。DDPM 展示了扩散模型能够生成高质量图像，标志着其开始与当时占主导地位的生成对抗网络（GANs）竞争。
 
+DDPM的核心是学习数据的分布：$x_0 \sim q(x_0)$,目标是构建一个模型$p_\theta (x_0)$,使其逼近真实数据分布。我们的优化目标是：$\max_{\theta} \log p_{\theta}(x_0)$, 其中:
+
+$$p_{\theta}(x_0) = \int p_{\theta}(x_{0:T}) \, \mathrm{d}x_{1:T}$$
+
+也就是把我们把所有“隐藏变量 $x_{1:T}$”都积分掉，只留下 $x_0$ 的概率.
+因此有：
+
+
+$$
+\begin{aligned}
+\log p_{\theta}(x_0) &= \log \int p_{\theta}(x_{0:T}) dx_{1:T}\\
+&=\log \int q(x_{1:T} | x_0) \frac{p_\theta(x_{0:T})}{q(x_{1:T} | x_0)} dx_{1:T}\\
+
+&=\log \mathbb{E}_{q(x_{1:T}|x_0)} \left[ \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} \right]
+\end{aligned}
+$$
+
+根据：$\log \mathbb{E}[X] \geq \mathbb{E}[\log X]$
+
+$
+\begin{equation}
+\log p_\theta(x_0) \geq \mathbb{E}_q \left[ \log \frac{p_\theta(x_{0:T})}{q(x_{1:T}|x_0)} \right]
+\end{equation}
+$
+我们知道：
+$
+\begin{equation}
+p_\theta(x_{0:T}) = p(x_T) \prod_{t=1}^{T} p_\theta(x_{t-1}|x_t)
+\end{equation}
+$
+$
+\begin{equation}
+q(x_{1:T}|x_0) = \prod_{t=1}^{T} q(x_t|x_{t-1})
+\end{equation}
+$
+
+得到（12）式右侧变为：
+
+$$
+\begin{equation}
+\begin{aligned}
+
+\mathbb{E}_q \left[ \log p(x_T) + \sum_{t=1}^{T} \log p_\theta(x_{t-1}|x_t) - \sum_{t=1}^{T} \log q(x_t|x_{t-1}) \right]\\
+= \mathbb{E}_q[\log p(x_T)] + \sum_{t=1}^{T} \mathbb{E}_q [\log p_\theta(x_{t-1}|x_t) - \log q(x_t|x_{t-1})]
+
+\end{aligned}
+\end{equation}
+$$
+
+根据概率链式法则（先从$x_0$到$x_{t-1}$,再从$x_{t-1}$到$x_{t}$）：
+
+$$q(x_{t-1}, x_t | x_0) = q(x_{t-1} | x_0) \, q(x_t | x_{t-1})$$
+
+逆向反推链式关系：
+
+$$q(x_{t-1}, x_t | x_0) = q(x_t | x_0) \, q(x_{t-1} | x_t, x_0)$$
+
+因为它们是同一个概率分布，所以：
+$$q(x_{t-1}|x_0) \, q(x_t|x_{t-1}) = q(x_t|x_0) \, q(x_{t-1}|x_t, x_0)$$
+
+
+$$q(x_t|x_{t-1}) = \frac{q(x_t|x_0) \, q(x_{t-1}|x_t, x_0)}{q(x_{t-1}|x_0)}$$
+
+$$\log q(x_t|x_{t-1}) = \log q(x_{t-1}|x_t, x_0) + \log q(x_t|x_0) - \log q(x_{t-1}|x_0)$$
+
+替换到（15）式中，
+$$
+\begin{aligned}
+-\sum_{t=1}^{T} \log q(x_t|x_{t-1})&=-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0) + \log q(x_t|x_0) - \log q(x_{t-1}|x_0))\\
+&=\sum_{t=1}^{T}(-\log q(x_t|x_0)+\log q(x_{t-1}|x_0))-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
+&=\log q(x_0|x_0)-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
+&=\log 0-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))\\
+&=-\log q(x_T|x_0)-\sum_{t=1}^{T}(\log q(x_{t-1}|x_t, x_0))
+\end{aligned}
+
+$$
+最终（12）式变为：
+
+$
+\begin{equation}
+\log p_\theta(x_0) \geq \mathbb{E}_q \left[ \log p(x_T) - \log q(x_T|x_0) + \sum_{t=1}^T (\log p_\theta(x_{t-1}|x_t) - \log q(x_{t-1}|x_t, x_0)) \right]
+\end{equation}
+$
+
+我们知道：
+
+$$
+KL(q \| p) = \mathbb{E}_q[\log q - \log p]
+$$
+
+针对（16）式，我们有：
+$$
+\mathbb{E}_q[\log p(x_T) - \log q(x_T|x_0)] = -KL(q(x_T|x_0) \| p(x_T))\\
+
+\mathbb{E}_q[\log p_\theta(x_{t-1}|x_t) - \log q(x_{t-1}|x_t, x_0)] = -KL(q \| p_\theta)
+$$
+当$t=1$时：$q(x_0 | x_1, x_0) = \delta(x_0)$,代表的含义是：在已经知道 $x_0$ 和 $x_1$的条件下，$x_0$的分布是什么？也就是不存在随机性，与模型的优化参数无关。最终（16）式变为：
+
+$
+\begin{equation}
+\log p_\theta(x_0) \geq \mathbb{E}_q[\log p_\theta(x_0|x_1)] - \sum_{t=2}^T KL(q(x_{t-1}|x_t, x_0) \| p_\theta(x_{t-1}|x_t)) - KL(q(x_T|x_0) \| p(x_T))
+\end{equation}
+$
+这3项分布代表：起点重构项，中间逐步匹配KL项，和终点KL项。
+
+一个概率图模型，全噪声的概率比较低，真实世界的所有高清图片，都分布在极其高维空间中的某些特定区域（我们称之为“数据流形”）。在这个高维空间里，每一点都有一个“概率值”，扩散模型学习的目标就是从任何地方出发，都指向高概率的区域，因此概率梯度变化最快的路径，就是模型需要学习的路径。
+
+我们知道：
+
+$$
+p(x_t) = \int p(x_t, x_0) \, dx_0=\int p(x_t|x_0)p(x_0) \, dx_0\\
+$$
+
+$$
+\begin{equation}
+\nabla \log f = \frac{\nabla f}{f}
+\end{equation}
+$$
+所以：
+$$
+\nabla_{x_t} \log p(x_t) = \frac{\nabla_{x_t} p(x_t)}{p(x_t)}
+$$
+
+对$x_t$求导：
+
+$$\nabla_{x_t} p(x_t) = \int \nabla_{x_t} p(x_t | x_0) p(x_0) \, dx_0$$
+
+根据（18）式得到：$\nabla p(x_t | x_0) = p(x_t | x_0) \nabla \log p(x_t | x_0)$,代入上式：
+
+$$
+\nabla p(x_t) = \int p(x_t | x_0) p(x_0) \nabla \log p(x_t | x_0) \, dx_0
+$$
+
+又因为：$p(x_t | x_0) p(x_0)=p(x_t,x_0)$,所以：
+$$\nabla p(x_t) = \int p(x_t, x_0) \nabla \log p(x_t | x_0) \, dx_0$$
+
+代回 log 梯度:
+$$
+\nabla \log p(x_t) = \frac{1}{p(x_t)} \int p(x_t, x_0) \nabla \log p(x_t | x_0) \, dx_0
+$$
+根据Bayes公式有：$p(x_0 | x_t) = \frac{p(x_t, x_0)}{p(x_t)}$,代入上式：
+$$\nabla \log p(x_t) = \int p(x_0 | x_t) \nabla \log p(x_t | x_0) \, dx_0$$
+
+得到：
+$$score= \nabla_{x_t} \log q(x_t) = \mathbb{E}_{q(x_0 | x_t)} [\nabla_{x_t} \log q(x_t | x_0)]$$
+
+对于高斯分布下的KL散度，经过进一步简单推导就能知道以下几个对象，都有明确的转换关系：
+
+$$KL \iff \|\mu_q - \mu_\theta\|^2 \iff \|\epsilon - \epsilon_\theta\|^2 \iff \|\text{score}_q - \text{score}_\theta\|^2$$
+
+训练的目标=在不同噪声强度下，学习去噪方向（score）,且这个score等价于预测噪声：
+$$\mathcal{L}_{\text{simple}} = \mathbb{E}_{t, x_0, \epsilon} \left[ \| \epsilon - \epsilon_\theta(x_t, t) \|^2 \right]$$
+
+如果在物理角度，其实是学习一个时间条件 score field：
+$$s_\theta(x, t) \approx \nabla_x \log p_t(x)=-\frac{\epsilon}{\sigma_t}$$
+
+### 物理图景
+
+（1）概率梯度（Score）之所以是学习目标，是因为只要掌握了梯度场，生成样本就退化成了一个简单的“顺流而下”的积分过程。这就是为什么扩散模型能生成极其高质量、多样化样本的根本原因。也就是学习了一个类似的低概率到高概律的物理场，生成过程只要在这个物理场中，不用管最终目标，结果必然会流向高概率，这个高概率也必然就是我们的目标。
+
+（2）在统计力学中，概率和能量是绑定的，玻尔兹曼分布：概率正比于 $e^{-E}$
+   - 高概率区域 = 低能量区域（也就是物理上的“稳定态”或“势能谷底”）。
+   - 低概率区域 = 高能量区域（物理上的“不稳定态”）。
+
+  扩散模型学习的 Score 场，本质上就是势能场的负梯度（也就是受力方向）。
+
+（3）我们曾经痴迷于“实体”——试图让 AI 记住每一张猫的照片，或者记住“猫”这个概念。
+但扩散模型的出现，标志着 AI 开始用“场”的思维来理解世界。
+   - Score 场：告诉你概率的梯度方向。
+   - 能量场：告诉你当前状态有多“稳定”。
+   - 速度场：告诉你如何从噪声平滑地流向数据（这就是目前大火的 Flow Matching 理论）。
+
+## 7. Scaling law 
+
+
+### Scaling Law 与临界标度律的形式同构
+
+机器学习中的 Scaling Law（如 loss 随模型规模、数据量、算力的幂律下降）呈现出一个非常稳定的经验结构：
+
+$$L(N) \sim N^{-\alpha}, \quad L(D) \sim D^{-\beta}, \quad L(C) \sim C^{-\gamma}$$
+
+幂律关系在多个数量级上成立,指数 α,β,γ 对架构变化不敏感, 这一点在 Kaplan et al.（2020）中被系统化描述，并形成一个经验事实:“Changing architecture does not significantly change the scaling exponent.”
+
+在统计物理中，临界点附近的系统也呈现同构结构(临界标度律（critical scaling law）)：
+$$\xi \sim |T - T_c|^{-\nu}, \quad M \sim |T - T_c|^{\beta}$$
+
+同样表现出：a.幂律（power law）,b.指数跨材料不变,c.微观细节不影响临界指数,d.在多个尺度上成立.
+
+| 物理系统               | AI系统                               |
+| ------------------ | ---------------------------------- |
+| 微观粒子相互作用           | 神经网络参数更新机制                         |
+| RG coarse-graining | 深层表示压缩 / feature abstraction       |
+| universality class | 模型族（Transformer） |
+| critical exponent  | scaling exponent (α, β, γ)         |
+
+
+### 统计物理临界标度律（critical scaling law）机制来源：重整化群（RG）作为潜在生成机制
+
+
+在物理中，临界标度律的深层机制是重整化群（Renormalization Group）不动点，其核心思想是：
+- 系统不断 coarse-graining（尺度变换）
+- 参数流向 RG flow
+- 在临界点附近收敛到不动点
+- 不动点决定所有临界指数
+
+### AI 领域的Scaling Law机制是什么？
+
+AI 领域的Scaling Law其机制层面的等价性仍未建立，猜测：AI可能处在某种高维统计系统的“类临界区间”，而非严格意义上的RG不动点系统。
+
+## 8. 物理与AI的其他关联展望
+还有很多其他的AI与物理学相似的地方，例如：涌现与相变，物理中最核心的对称性理论（物理中除了场的思想之外，最具深刻的思想）与AI大模型的架构联系，甚至与人类大脑的结构关系等等，都是非常有趣的现象，值得思考。
