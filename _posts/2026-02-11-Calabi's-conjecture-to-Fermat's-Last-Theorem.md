@@ -2,8 +2,8 @@
 title: 人类智慧的漫长接力：从卡拉比猜想到费马大定理
 author: yuchong
 date: 2026-02-11 00:34:00 +0800
-categories: [mathematics]
-tags: [mathematics]
+categories: [mathematic]
+tags: [mathematic]
 math: true
 ---
 
